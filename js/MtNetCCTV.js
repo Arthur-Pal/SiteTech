@@ -414,3 +414,40 @@ function checkInputDate(obj) {
 
     return true;
 }
+
+//新增影像管理List
+function InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg) {
+    console.log("InsertCCTVManager local: " + local + " dateTime : " + dateTime + " shipName : " + shipName + " eventName : " + eventName + " Uploader : " + Uploader + " Type : " + Type + " addNoteMesg : " + addNoteMesg + "")
+
+    let hostOrigion = "http://localhost";
+    var url = "/vtsApi/api/CCTV/InsertCCTVData";
+    var Url = hostOrigion + url;
+
+    var VO = {
+        Location: local,
+        Time: dateTime,
+        shipName: shipName,
+        eventName: eventName,
+        Uploader: Uploader,
+        Type: Type,
+        Remark: addNoteMesg
+    };
+
+    $.ajax({
+        url: Url,
+        type: "POST",
+        async: false,
+        dataType: "json",
+        data: JSON.stringify(VO),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            alert('success Insert Data');
+        },
+        error: function (error) {
+            alert('error Fail Insert Data');
+        }
+    });
+
+    $('#CCTVManager-Anchor-point').empty();
+    LoadCCTVManagement();
+}

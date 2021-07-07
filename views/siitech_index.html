@@ -2898,10 +2898,10 @@
 		                    </div>
 		                    
 		                    <div class="btn-area">
-		                        <div class="btn btn-submit" id="Search">
+		                        <div class="btn btn-submit">
 		                            <i class="fas fa-search"></i>
 		                            搜尋
-									<input type="button">
+									<input type="button" id="VideoSearch">
 		                        </div>
 		                    </div>
 		                </form>
@@ -3774,37 +3774,41 @@
 
                 var local = $('#local').val();
                 var dateTime = $('#dateTime').val();
-                if (!checkInputDate(dateTime)) {
-                    $('#dateTime').val("");
-                    return;
-                }
-                var shipName = $('#shipName').val();
-                var eventName = $('#eventName').val();
-                var Uploader = "勇者";
-                var Type = "影片 照片";
-                var addNoteMesg = $('#addNoteMesg').val();
+				if (!checkInputDate(dateTime)) {
+					$('#dateTime').val("");
+					return;
+				} else
+				{
+                    var shipName = $('#shipName').val();
+                    var eventName = $('#eventName').val();
+                    var Uploader = "勇者";
+                    var Type = "照片";
+                    var addNoteMesg = $('#addNoteMesg').val();
 
-                InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg);
+                    InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg);
 
-                $('#videoList').show();
-                $('#live,#videoAdd').hide();
+                    $('#videoList').show();
+                    $('#live,#videoAdd').hide();
+				}
             });
 
             //影像管理查詢搜尋按鈕 Search
-            $("#Search").on('click', function () {
+            $("#VideoSearch").on('click', function () {
                 var Flag = $('input:radio[name="search"]:checked').val();
                 var StartDate = $('#dateStart').val();
                 var EndDate = $('#dateEnd').val();
-                if (!checkInputDate(StartDate) || !checkInputDate(EndDate)) {
-                    $('#dateStart').val("");
-                    $('#dateEnd').val("");
-                    return;
-                }
-                var KeyWord = $('#keyWord').val();
-                var Type = $('#SearchType').val();
+				if (!checkInputDate(StartDate) || !checkInputDate(EndDate)) {
+					$('#dateStart').val("");
+					$('#dateEnd').val("");
+					return false;
+				} else
+				{
+                    var KeyWord = $('#keyWord').val();
+                    var Type = $('#SearchType').val();
 
-                console.log("Flag: " + Flag + ". StartDate: " + StartDate + ". EndDate: " + EndDate + ". KeyWord: " + KeyWord + ". Type: " + Type + "");
-                CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
+                    console.log("Flag: " + Flag + ". StartDate: " + StartDate + ". EndDate: " + EndDate + ". KeyWord: " + KeyWord + ". Type: " + Type + "");
+                    CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
+				}
             });
 
             //查詢按鈕
