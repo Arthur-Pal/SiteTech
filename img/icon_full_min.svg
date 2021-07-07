@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="14px" viewBox="0 0 31 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon_full_min</title>
+    <defs>
+        <polygon id="path-1" points="0.0002 0.6254 20.5712 0.6254 20.5712 3 0.0002 3"></polygon>
+        <polygon id="path-3" points="0.78144 0.867297801 12.7812 0.867297801 12.7812 9.42953015 0.78144 9.42953015"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Apple-TV" transform="translate(-815.000000, -407.000000)">
+            <g id="icon_full_min" transform="translate(815.000000, 407.000000)">
+                <g id="Group-3" transform="translate(0.000000, 9.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M19.3842,3.0004 L1.1872,3.0004 C0.5342,3.0004 0.0002,2.4664 0.0002,1.8134 C0.0002,1.1594 0.5342,0.6254 1.1872,0.6254 L19.3842,0.6254 C20.0372,0.6254 20.5712,1.1594 20.5712,1.8134 C20.5712,2.4664 20.0372,3.0004 19.3842,3.0004" id="Fill-1" fill="#FEFEFE" mask="url(#mask-2)"></path>
+                </g>
+<<<<<<< HEAD
+                <g id="Group-6" transform="translate(25.600000, 6.800000) rotate(-270.000000) translate(-25.600000, -6.800000) translate(19.000000, 2.000000)">
+=======
+                <g id="Group-6" transform="translate(25.600000, 6.800000) scale(1, -1) rotate(-270.000000) translate(-25.600000, -6.800000) translate(19.000000, 2.000000)">
+>>>>>>> d5e1ce86355ecb93ad65557d62affb2c0023c5c5
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="Clip-5"></g>
+                    <path d="M0.78144,6.1782 L0.78144,4.1214 C0.78144,3.8358 1.01064,3.6066 1.29624,3.6066 L7.98144,3.6066 L7.98144,1.383 C7.98144,0.9246 8.53344,0.6954 8.85864,1.0182 L12.63024,4.785 C12.83184,4.9866 12.83184,5.313 12.63024,5.5134 L8.85864,9.2778 C8.53584,9.6018 7.98144,9.3726 7.98144,8.9142 L7.98144,6.6918 L1.29624,6.6918 C1.01064,6.6918 0.78144,6.4626 0.78144,6.1782" id="Fill-4" fill="#FFFFFF" mask="url(#mask-4)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
