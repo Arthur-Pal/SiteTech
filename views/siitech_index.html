@@ -15,8 +15,17 @@
 	<!-- 日期選擇 -->
 	<script type="text/javascript" src="../js/datepicker.min.js"></script>
 	<script src="../js/i18n/datepicker.en.js"></script>
-
+	<!--cctv-->
 	<script type="text/javascript" src="../js/backend.js"></script>
+
+	<!--jqPaginator-->
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/htmleaf-demo.css">
+	<!--韶元增加 -->
+	<script type="text/javascript" src="../js/jqPaginator.js"></script>
+
+	<!-- 20210628 韶元增加 -->
+	<script type="text/javascript" src="../js/MtNetCCTV.js"></script>
 
 	<!-- 日期選擇樣式 -->
 	<link rel="stylesheet" href="../css/datepicker.min.css">
@@ -2770,16 +2779,16 @@
 		            <div class="input-box w">
 		                <div class="inline-input-box">
 		                    <label for="sel">單位</label>
-		                    <select name="sel" id="sel" class="select-sty">
-		                        <option value="0">台灣港務中心</option>
-		                        <option value="1">基隆港務中心</option>
+		                    <select name="sel" id="Unitsel" class="select-sty">
+		                        <!--<option value="0">台灣港務中心</option>
+		                        <option value="1">基隆港務中心</option>-->
 		                    </select>
 		                </div>
 		                <div class="inline-input-box">
 		                    <label for="sel">內部單位</label>
-		                    <select name="sel" id="sel" class="select-sty">
-		                        <option value="0">高雄分公司</option>
-		                        <option value="1">屏東分公司</option>
+		                    <select name="sel" id="InnerUnitsel" class="select-sty">
+		                        <!--<option value="0">高雄分公司</option>
+		                        <option value="1">屏東分公司</option>-->
 		                    </select>
 		                </div>
 		                <div class="inline-input-box">
@@ -2787,8 +2796,8 @@
 		                </div>
 		            </div>
 		            <div class="cctv-list">
-		                <ul>
-		                    <li>
+		                <ul id="CCTV-Anchor-point">
+		                    <!--<li>
 		                        <div class="live-box">LIVE</div>
 		                        <div class="live-name">LIVE名稱LIVE名稱LIVE名稱</div>
 		                        <a href="https://www.youtube.com/watch?v=rvj8Le19iRI" target="_blank">
@@ -2829,7 +2838,7 @@
 		                        <a href="https://www.youtube.com/watch?v=rvj8Le19iRI" target="_blank">
 		                            <img src="../img/cctv_5.jpg" alt="">
 		                        </a>
-		                    </li>
+		                    </li>-->
 		                </ul>
 		            </div>
 		        </div>
@@ -2857,7 +2866,7 @@
 		                <form method="get" action="" id="searchForm">
 		                    <div class="search-ui-box">
 		                        <label for="searchDateRange">
-		                            <input type="radio" name="search" id="searchDateRange" value="2">
+		                            <input type="radio" name="search" id="searchDateRange" value="區間日期">
 		                            <div class="radio-box"></div>
 		                            <span>查詢區間範圍：</span>
 		                        </label>
@@ -2868,7 +2877,7 @@
 		                    </div>
 		                    <div class="search-ui-box">
 		                        <label for="userKeyWord">
-		                            <input type="radio" name="search" id="userKeyWord" value="1">
+		                            <input type="radio" name="search" id="userKeyWord" value="關鍵字">
 		                            <div class="radio-box"></div>
 		                            <span>關鍵字檢索：</span>
 		                        </label>
@@ -2876,22 +2885,23 @@
 		                    </div>
 		                    <div class="search-ui-box">
 		                        <label for="type">
-		                            <input type="radio" name="search" id="type" value="4">
+		                            <input type="radio" name="search" id="type" value="類型">
 		                            <div class="radio-box"></div>
 		                            <span>類型：</span>
 		                        </label>
-		                        <select type="text" name="" id="SearchType" value="" class="select-sty w150">
-		                            <option value="">全部</option>
-		                            <option value="">照片</option>
-		                            <option value="">影片</option>
-		                        </select>
+								<select type="text" name="" id="SearchType" value="" class="select-sty w150">
+									<option value="">全部</option>
+									<option value="">照片與影片</option>
+									<option value="">照片</option>
+									<option value="">影片</option>
+								</select>
 		                    </div>
 		                    
 		                    <div class="btn-area">
 		                        <div class="btn btn-submit" id="Search">
 		                            <i class="fas fa-search"></i>
 		                            搜尋
-		                            <input type="submit">
+									<input type="button">
 		                        </div>
 		                    </div>
 		                </form>
@@ -2912,8 +2922,8 @@
 		                    <div class="group-box-15 opera">操作</div>
 		                </li>
 		                <!-- 編輯時 要可以上傳影片或相片 -->
-		                <li>
-		                    <div class="group-box-83">
+		                <li id="CCTVManager-Anchor-point">
+		                    <!--<div class="group-box-83">
 		                        <div class="box-5 txt-c">3</div>
 		                        <div class="box-10">2014/01/01</div>
 		                        <div class="box-10">基隆港</div>
@@ -2933,11 +2943,10 @@
 		                        <a href="#" title="刪除" alt="刪除" class="js-del-confirm">
 		                            <i class="fad fa-times-square"></i>
 		                        </a>
-		                    </div>
-		                </li>
-		
+		                    </div>-->
+		                </li>	
 		            </ul>
-		            <div class="pagination">
+		            <!--<div class="pagination">
 		                <div class="pagination-numbers">
 		                    <a href="#" title="第一頁">
 		                        <i class="fas fa-arrow-to-left"></i>
@@ -2957,7 +2966,12 @@
 		                        <i class="fas fa-arrow-to-right"></i>
 		                    </a>
 		                </div>
-		            </div>
+		            </div>-->
+					<div class="pagination">
+						<div class="pagination-numbers">
+							<ul id="pagination0"></ul>
+						</div>
+					</div>
 		        </div>
 		    </div>
 		    <!-- 新增事件 -->
@@ -3754,7 +3768,93 @@
 				console.log("move")
 			})
 
-		})
+            //20210625 韶元加入
+            //影像管理新增影像按鈕
+            $('#btnSubmitVideoAdd').on('click', function () {
+
+                var local = $('#local').val();
+                var dateTime = $('#dateTime').val();
+                if (!checkInputDate(dateTime)) {
+                    $('#dateTime').val("");
+                    return;
+                }
+                var shipName = $('#shipName').val();
+                var eventName = $('#eventName').val();
+                var Uploader = "勇者";
+                var Type = "影片 照片";
+                var addNoteMesg = $('#addNoteMesg').val();
+
+                InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg);
+
+                $('#videoList').show();
+                $('#live,#videoAdd').hide();
+            });
+
+            //影像管理查詢搜尋按鈕 Search
+            $("#Search").on('click', function () {
+                var Flag = $('input:radio[name="search"]:checked').val();
+                var StartDate = $('#dateStart').val();
+                var EndDate = $('#dateEnd').val();
+                if (!checkInputDate(StartDate) || !checkInputDate(EndDate)) {
+                    $('#dateStart').val("");
+                    $('#dateEnd').val("");
+                    return;
+                }
+                var KeyWord = $('#keyWord').val();
+                var Type = $('#SearchType').val();
+
+                console.log("Flag: " + Flag + ". StartDate: " + StartDate + ". EndDate: " + EndDate + ". KeyWord: " + KeyWord + ". Type: " + Type + "");
+                CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
+            });
+
+            //查詢按鈕
+            $("#btnQuery").on('click', function () {
+                var Unit = $('#Unitsel').val();
+                var InnerUnit = $('#InnerUnitsel').val();
+                BtnCCTVQuery(Unit, InnerUnit);
+            });
+
+            $("#btnUpload").click(function () {
+
+                let hostOrigion = "http://localhost";
+                var url = "/vtsApi/api/CCTV/UploadFiles";
+                var Url = hostOrigion + url;
+
+                var data = new FormData($('#upload_form')[0]);
+
+                $.ajax({
+                    type: "POST",
+                    url: Url,    // CALL WEB API TO SAVE THE FILES.
+                    enctype: 'multipart/form-data',
+                    contentType: false,
+                    processData: false,         // PREVENT AUTOMATIC DATA PROCESSING.
+                    cache: false,
+                    data: data, 		        // DATA OR FILES IN THIS CONTEXT.
+                    success: function (data, textStatus, xhr) {
+                        $("#fileProgress").hide();
+                        $('p').text(data);
+                    },
+                    //error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //	alert(textStatus + ': ' + errorThrown);
+                    //},
+                    xhr: function () {
+                        var fileXhr = $.ajaxSettings.xhr();
+                        if (fileXhr.upload) {
+                            $("progress").show();
+                            fileXhr.upload.addEventListener("progress", function (e) {
+                                if (e.lengthComputable) {
+                                    $("#fileProgress").attr({
+                                        value: e.loaded,
+                                        max: e.total
+                                    });
+                                }
+                            }, false);
+                        }
+                        return fileXhr;
+                    }
+                });
+            });
+        });
 
 		// let screenLog = document.querySelector('#screen-log');
 		// document.addEventListener('mousemove', logKey);
