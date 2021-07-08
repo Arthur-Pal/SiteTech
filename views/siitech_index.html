@@ -15,8 +15,17 @@
 	<!-- 日期選擇 -->
 	<script type="text/javascript" src="../js/datepicker.min.js"></script>
 	<script src="../js/i18n/datepicker.en.js"></script>
-
+	<!--cctv-->
 	<script type="text/javascript" src="../js/backend.js"></script>
+
+	<!--jqPaginator-->
+	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../css/htmleaf-demo.css">
+	<!--韶元增加 -->
+	<script type="text/javascript" src="../js/jqPaginator.js"></script>
+
+	<!-- 20210628 韶元增加 -->
+	<script type="text/javascript" src="../js/MtNetCCTV.js"></script>
 
 	<!-- 日期選擇樣式 -->
 	<link rel="stylesheet" href="../css/datepicker.min.css">
@@ -2770,16 +2779,16 @@
 		            <div class="input-box w">
 		                <div class="inline-input-box">
 		                    <label for="sel">單位</label>
-		                    <select name="sel" id="sel" class="select-sty">
-		                        <option value="0">台灣港務中心</option>
-		                        <option value="1">基隆港務中心</option>
+		                    <select name="sel" id="Unitsel" class="select-sty">
+		                        <!--<option value="0">台灣港務中心</option>
+		                        <option value="1">基隆港務中心</option>-->
 		                    </select>
 		                </div>
 		                <div class="inline-input-box">
 		                    <label for="sel">內部單位</label>
-		                    <select name="sel" id="sel" class="select-sty">
-		                        <option value="0">高雄分公司</option>
-		                        <option value="1">屏東分公司</option>
+		                    <select name="sel" id="InnerUnitsel" class="select-sty">
+		                        <!--<option value="0">高雄分公司</option>
+		                        <option value="1">屏東分公司</option>-->
 		                    </select>
 		                </div>
 		                <div class="inline-input-box">
@@ -2787,8 +2796,8 @@
 		                </div>
 		            </div>
 		            <div class="cctv-list">
-		                <ul>
-		                    <li>
+		                <ul id="CCTV-Anchor-point">
+		                    <!--<li>
 		                        <div class="live-box">LIVE</div>
 		                        <div class="live-name">LIVE名稱LIVE名稱LIVE名稱</div>
 		                        <a href="https://www.youtube.com/watch?v=rvj8Le19iRI" target="_blank">
@@ -2829,7 +2838,7 @@
 		                        <a href="https://www.youtube.com/watch?v=rvj8Le19iRI" target="_blank">
 		                            <img src="../img/cctv_5.jpg" alt="">
 		                        </a>
-		                    </li>
+		                    </li>-->
 		                </ul>
 		            </div>
 		        </div>
@@ -2857,7 +2866,7 @@
 		                <form method="get" action="" id="searchForm">
 		                    <div class="search-ui-box">
 		                        <label for="searchDateRange">
-		                            <input type="radio" name="search" id="searchDateRange" value="2">
+		                            <input type="radio" name="search" id="searchDateRange" value="區間日期">
 		                            <div class="radio-box"></div>
 		                            <span>查詢區間範圍：</span>
 		                        </label>
@@ -2868,7 +2877,7 @@
 		                    </div>
 		                    <div class="search-ui-box">
 		                        <label for="userKeyWord">
-		                            <input type="radio" name="search" id="userKeyWord" value="1">
+		                            <input type="radio" name="search" id="userKeyWord" value="關鍵字">
 		                            <div class="radio-box"></div>
 		                            <span>關鍵字檢索：</span>
 		                        </label>
@@ -2876,22 +2885,23 @@
 		                    </div>
 		                    <div class="search-ui-box">
 		                        <label for="type">
-		                            <input type="radio" name="search" id="type" value="4">
+		                            <input type="radio" name="search" id="type" value="類型">
 		                            <div class="radio-box"></div>
 		                            <span>類型：</span>
 		                        </label>
-		                        <select type="text" name="" id="SearchType" value="" class="select-sty w150">
-		                            <option value="">全部</option>
-		                            <option value="">照片</option>
-		                            <option value="">影片</option>
-		                        </select>
+								<select type="text" name="" id="SearchType" value="" class="select-sty w150">
+									<option value="">全部</option>
+									<option value="">照片與影片</option>
+									<option value="">照片</option>
+									<option value="">影片</option>
+								</select>
 		                    </div>
 		                    
 		                    <div class="btn-area">
-		                        <div class="btn btn-submit" id="Search">
+		                        <div class="btn btn-submit">
 		                            <i class="fas fa-search"></i>
 		                            搜尋
-		                            <input type="submit">
+									<input type="button" id="VideoSearch">
 		                        </div>
 		                    </div>
 		                </form>
@@ -2912,52 +2922,16 @@
 		                    <div class="group-box-15 opera">操作</div>
 		                </li>
 		                <!-- 編輯時 要可以上傳影片或相片 -->
-		                <li>
-		                    <div class="group-box-83">
-		                        <div class="box-5 txt-c">3</div>
-		                        <div class="box-10">2014/01/01</div>
-		                        <div class="box-10">基隆港</div>
-		                        <div class="box-15">拋錨</div>
-		                        <div class="box-15 txt-c">大船頭1號</div>
-		                        <div class="box-10 txt-c">truesun</div>
-		                        <div class="box-10 txt-c">影片</div>
-		                        <div class="box-20">涉及多艘船，且多數船皆已全毀，但無人傷亡</div>
-		                    </div>
-		                    <div class="group-box-15 opera">
-		                        <a href="#" title="檢視" alt="檢視" class="js-views-only">
-		                            <i class="fad fa-eye"></i>
-		                        </a>
-		                        <a href="###" title="編輯" alt="編輯" class="js-page-edit">
-		                            <i class="fad fa-pen-square"></i>
-		                        </a>
-		                        <a href="#" title="刪除" alt="刪除" class="js-del-confirm">
-		                            <i class="fad fa-times-square"></i>
-		                        </a>
-		                    </div>
-		                </li>
-		
+		                <li id="CCTVManager-Anchor-point">
+		                   
+		                </li>	
 		            </ul>
-		            <div class="pagination">
-		                <div class="pagination-numbers">
-		                    <a href="#" title="第一頁">
-		                        <i class="fas fa-arrow-to-left"></i>
-		                    </a>
-		                    <a href="#" title="上一頁">
-		                        <i class="fas fa-arrow-left"></i>
-		                    </a>
-		                    <a href="#">1</a>
-		                    <a href="#">2</a>
-		                    <a href="#" title="" class="act">3</a>
-		                    <a href="#">4</a>
-		                    <a href="#">5</a>
-		                    <a href="#" title="下一頁">
-		                        <i class="fas fa-arrow-right"></i>
-		                    </a>
-		                    <a href="#" title="最後頁">
-		                        <i class="fas fa-arrow-to-right"></i>
-		                    </a>
-		                </div>
-		            </div>
+		            
+					<div class="pagination">
+						<div class="pagination-numbers">
+							<ul id="pagination0"></ul>
+						</div>
+					</div>
 		        </div>
 		    </div>
 		    <!-- 新增事件 -->
@@ -3013,294 +2987,185 @@
 		    </div>
 		    <!-- 編輯事件 -->
 		    <div id="videoEdit" style="height:100%; display:none;">
-		        <div class="inline-cont">
-		            <div class="sub-page">
-		                <ul>
-		                    <li class="js-page-live" >
-		                        <a href="#" >影像即時觀看</a>
-		                    </li>
-		                    <li class="js-page-video act">
-		                        <a href="#">影像管理</a>
-		                    </li>
-		                </ul>
-		            </div>
-		            <h3>
-		                編輯事件影像
-		            </h3>
-		            <div class="input-box">
-		                <label for="editLocal">地點</label>
-		                <input type="text" class="input-sty" name="editLocal" id="editLocal" value="基隆港">
-		            </div>
-		            <div class="input-box">
-		                <label for="editShipName">船名</label>
-		                <input type="text" class="input-sty" name="editShipName" id="editShipName" value="魚滿6號">
-		            </div>
-		            <div class="input-box">
-		                <label for="editEventName">事件名稱</label>
-		                <input type="text" class="input-sty" name="editEventName" id="editEventName" value="碰撞">
-		            </div>
-		            <div class="input-box icon-right">
-		                <label for="editDateTime">時間</label>
-		                <input type="text" class="input-sty required datepicker-here" data-timepicker="true" name="editDateTime"
-		                    id="editDateTime" value="2021/06/01 13:50">
-		                <i class="fad fa-calendar-alt"></i>
-		            </div>
-		            <div class="input-box w">
-		                <label for="noteMesg">備註</label>
-		                <input type="text" class="input-sty" name="noteMesg" id="noteMesg" value="無人員傷亡">
-		            </div>
-		
-		            <div class="tab-box">
-		                <span id="btnVideo" class="act">事件影片集</span><span id="btnPhoto">事件照片集</span>
-		            </div>
-		            <!-- 編輯相片區塊 如果一開始是空的直接隱藏即可 -->
-		            <div class="photo-box" id="pagePhoto" style="display:none;">
-		                <ul class="photo-list">
-		                    <li>
-		                        <div class="del-photo" title="刪除" alt="刪除" onclick=""></div>
-		                        <img src="../img/backend_img/img_life.jpg" alt="">
-		                        <p>
-		                            <input type="text" class="input-sty" value="ship name.jpg">
-		                        </p>
-		                    </li>
-		                    <li>
-		                        <div class="del-photo" title="刪除" alt="刪除" onclick=""></div>
-		                        <img src="../img/backend_img/img_life.jpg" alt="">
-		                        <p>
-		                            <input type="text" class="input-sty" value="dkueya18616.jpg">
-		                        </p>
-		                    </li>
-		                    <li>
-		                        <div class="del-photo" title="刪除" alt="刪除" onclick=""></div>
-		                        <img src="../img/backend_img/img_life.jpg" alt="">
-		                        <p>
-		                            <input type="text" class="input-sty" value="home.jpg">
-		                        </p>
-		                    </li>
-		                    <li>
-		                        <div class="del-photo" title="刪除" alt="刪除" onclick=""></div>
-		                        <img src="../img/backend_img/img_life.jpg" alt="">
-		                        <p>
-		                            <input type="text" class="input-sty" value="siiitecn_ship.png">
-		                        </p>
-		                    </li>
-		                    <li>
-		                        <div class="del-photo" title="刪除" alt="刪除" onclick=""></div>
-		                        <img src="../img/backend_img/img_life.jpg" alt="">
-		                        <p>
-		                            <input type="text" class="input-sty" value="test.png">
-		                        </p>
-		                    </li>
-		                </ul>
-		                <div class="input-box w">
-		                    <label for="EditUploadMultiple">上傳照片(可選取多張上傳)</label>
-		                    <div class="note">僅可上傳*.jpg , *.png , *.jpeg 等格式檔案</div>
-		                    <div class="upload-form-file">
-		                        <div class="form-file">
-		                            <input type="file" name="EditUploadMultiple" id="EditUploadMultiple" multiple="multiple" accept=".png, .jpg, .jpeg" >
-		                            <i class="fad fa-cloud-upload-alt"></i> 選擇檔案
-		                        </div>
-		                    </div>
-		                    <ul class="photo-list" id="editPreViewList"></ul>
-		                </div>
-		            </div>
-		            <!-- 編輯影片區塊 -->
-		            <div class="video-box" id="pageVideo" style="display:;">
-		                <ul class="photo-list video-list">
-		                    <li> 
-		                        <div class="del-photo" title="刪除" alt="刪除" onclick=""></div>
-		                        <a href="###">
-		                            <!-- <img src="../img/cctv_8.jpg" alt=""> -->
-		                            <video muted id="v1">
-		                                <source src="../video/cctv_1.webm" type="video/webm">
-		                                <source src="../video/cctv_1.mp4" type="video/mp4">
-		                                您的瀏覽器不支援此格式播放。
-		                            </video>
-		                        </a>
-		                        <p>
-		                            <input type="text" class="input-sty" value="ship_path.mp4">
-		                        </p>
-		                    </li>
-		                    <li>
-		                        <div class="del-photo" title="刪除" alt="刪除" onclick=""></div>
-		                        <a href="###">
-		                            <!-- <img src="../img/cctv_7.jpeg" alt=""> -->
-		                            <video muted id="v2">
-		                                <source src="../video/cctv_2.webm" type="video/webm">
-		                                <source src="../video/cctv_2.mp4" type="video/mp4">
-		                                您的瀏覽器不支援此格式播放。
-		                            </video>
-		                        </a>
-		                        <p>
-		                            <input type="text" class="input-sty" value="20210501_test.mp4">
-		                        </p>
-		                    </li>
-		                </ul>
-		                <div class="input-box w">
-		                    <label for="">新增影片</label>
-		                    <div class="note">僅可上傳*.mp4 , *.mpeg 等格式檔案</div>
-		                    <div class="upload-video-group">
-		                        <div class="upload-group">
-		                            <div class="inline-input-box">
-		                                <label for="videoName1">影片名稱</label>
-		                                <input type="text" class="input-sty" name="videoName1" id="videoName1" value="" style="width: 300px;">
-		                            </div>
-		                            <div class="inline-input-box">
-		                                <div class="upload-form-file">
-		                                    <div class="form-file">
-		                                        <input type="file" name="uploadFile1" id="uploadFile1" onchange="uploadFile( $('#uploadFile1') );">
-		                                        <i class="fad fa-cloud-upload-alt"></i> 選擇檔案
-		                                    </div>
-		                                    <span class="file-name"></span>
-		                                </div>
-		                            </div>
-		                        </div>
-		                        <div class="btn btn-green upload-plus">
-		                            <i class="fas fa-plus"></i> 
-		                            增加影片
-		                        </div>
-		                    </div>
-		                </div>
-		
-		                <!-- 20210706 sun 修改 -->
-		                <div class="upload-video-group">
-		                    <div class="upload-box">
-		                        <form id="upload_form" action="">
-		                            <label for="uploadInput">上傳影片</label>
-		                            <div class="btn-upload"><!-- 這邊class拿掉 btn btn-green upload-plus 可刪-->
-		                                <!-- <i class="fas fa-plus"></i> 選擇影片 可刪-->
-		                                <input type="file" id="file" name="file" value="" multiple />
-		                            </div>
-		                            <div class="btn btn-submit" id="btnUpload">
-		                                <i class="fad fa-upload"></i> 確定上傳
-		                                <input type="button">
-		                            </div>
-		                            <progress id="fileProgress" style="display:none;"></progress>
-		                            <p></p>
-		                        </form>
-		                        
-		                    </div>
-		                </div>
-		            </div>
-		            
-		            
-		            <div class="btn-area">
-		                <div class="btn btn-cancel" id="btnEditCancel">
-		                    <i class="fa fa-chevron-left"></i> 取消
-		                </div>
-		                <div class="btn btn-submit" id="btnSubmitVideoAdd">
-		                    <i class="fa fa-check"></i> 確認修改
-		                    <input type="submit" class="btn">
-		                </div>
-		            </div>
-		        </div>
+				<div class="inline-cont">
+					<div class="sub-page">
+						<ul>
+							<li class="js-page-live">
+								<a href="#">影像即時觀看</a>
+							</li>
+							<li class="js-page-video act">
+								<a href="#">影像管理</a>
+							</li>
+						</ul>
+					</div>
+					<h3>
+						編輯事件影像
+					</h3>
+					<div class="input-box">
+						<label for="editLocal">地點</label>
+						<input type="text" class="input-sty" name="editLocal" id="editLocal" value="">
+					</div>
+					<div class="input-box">
+						<label for="editShipName">船名</label>
+						<input type="text" class="input-sty" name="editShipName" id="editShipName" value="">
+					</div>
+					<div class="input-box">
+						<label for="editEventName">事件名稱</label>
+						<input type="text" class="input-sty" name="editEventName" id="editEventName" value="">
+					</div>
+					<div class="input-box icon-right">
+						<label for="editDateTime">時間</label>
+						<input type="text" class="input-sty required datepicker-here" data-timepicker="true" name="editDateTime"
+							   id="editDateTime" value="">
+						<i class="fad fa-calendar-alt"></i>
+					</div>
+					<div class="input-box w">
+						<label for="noteMesg">備註</label>
+						<input type="text" class="input-sty" name="noteMesg" id="noteMesg" value="">
+					</div>
+					<div class="input-box w" style="display:none;">
+						<label for="noteMesg">UUID</label>
+						<input type="text" class="input-sty" name="UUID" id="UUID" value="">
+					</div>
+
+					<div class="tab-box">
+						<span id="btnVideo" class="act">事件影片集</span><span id="btnPhoto">事件照片集</span>
+					</div>
+					<!-- 編輯相片區塊 如果一開始是空的直接隱藏即可 -->
+					<div class="photo-box" id="pagePhoto" style="display:none;">
+						<ul class="photo-list" id="CCTV-GetShowPic-Anchor-point">
+						
+						</ul>
+						<!-- 20210706 sun 修改 -->
+						<div class="upload-video-group">
+							<div class="upload-box">
+								<form id="Pic_upload_form" action="">
+									<label for="uploadInput">上傳照片</label>
+									<div class="btn-upload">
+										<!-- 這邊class拿掉 btn btn-green upload-plus 可刪-->
+										<!-- <i class="fas fa-plus"></i> 選擇影片 可刪-->
+										<input type="file" id="Picfile" name="Picfile" value=""/>
+									</div>
+									<div class="btn btn-submit" id="btnPicUpload">
+										<i class="fad fa-upload"></i> 確定上傳
+										<input type="button">
+									</div>
+									<progress id="PicfileProgress" style="display:none;"></progress>
+									<p></p>
+								</form>
+
+							</div>
+						</div>
+					</div>
+					<!-- 編輯影片區塊 -->
+					<div class="video-box" id="pageVideo" style="display:;">
+						<ul class="photo-list video-list" id="CCTV-GetShowFilm-Anchor-point">
+						
+						</ul>
+				
+						<!-- 20210706 sun 修改 -->
+						<div class="upload-video-group">
+							<div class="upload-box">
+								<form id="Film_upload_form" action="">
+									<label for="uploadInput">上傳影片</label>
+									<div class="btn-upload">
+										<!-- 這邊class拿掉 btn btn-green upload-plus 可刪-->
+										<!-- <i class="fas fa-plus"></i> 選擇影片 可刪-->
+										<input type="file" id="Filmfile" name="file" value=""/>
+									</div>
+									<div class="btn btn-submit" id="btnUpload">
+										<i class="fad fa-upload"></i> 確定上傳
+										<input type="button">
+									</div>
+									<progress id="fileProgress" style="display:none;"></progress>
+									<p></p>
+								</form>
+
+							</div>
+						</div>
+					</div>
+
+
+					<div class="btn-area">
+						<div class="btn btn-cancel" id="btnEditCancel">
+							<i class="fa fa-chevron-left"></i> 取消
+						</div>
+						<div class="btn btn-submit" id="btnSubmitVideoAdd">
+							<i class="fa fa-check"></i> 確認修改
+							<input type="submit" class="btn">
+						</div>
+					</div>
+				</div>
 		        
 		    </div>
 		    <!-- 觀看事件 -->
 		    <div id="videoOnlyView" style="height:100%; display:none;">
-		        <div class="inline-cont">
-		            <div class="sub-page">
-		                <ul>
-		                    <li class="js-page-live" >
-		                        <a href="#" >影像即時觀看</a>
-		                    </li>
-		                    <li class="js-page-video act">
-		                        <a href="#">影像管理</a>
-		                    </li>
-		                </ul>
-		            </div>
-		            <h3>
-		                檢視事件影像
-		            </h3>
-		            <div class="input-box">
-		                <label>地點</label>
-		                <span>基隆港</span>
-		            </div>
-		            <div class="input-box">
-		                <label>船名</label>
-		                <span>魚滿6號</span>
-		            </div>
-		            <div class="input-box">
-		                <label>事件名稱</label>
-		                <span>碰撞</span>
-		            </div>
-		            <div class="input-box icon-right">
-		                <label>時間</label>
-		                <span>2021/06/01 13:50</span>
-		            </div>
-		            <div class="input-box w">
-		                <label>備註</label>
-		                <span>無人員傷亡</span>
-		            </div>
-		
-		            <div class="tab-box">
-		                <span id="btnViewVideo" class="act">事件影片集</span><span id="btnViewPhoto">事件照片集</span>
-		            </div>
-		            <!-- 觀看相片區塊 -->
-		            <div class="photo-box" id="pageViewPhoto" style="display:none;">
-		                <ul class="photo-list" id="photoList">
-		                    <li>
-		                        <a href="###">
-		                            <img src="../img/cctv_1.png" alt="">
-		                        </a>
-		                        <p>ship name.jpg</p>
-		                    </li>
-		                    <li>
-		                        <a href="###">
-		                            <img src="../img/cctv_2.jpg" alt="">
-		                        </a>
-		                        <p>dkueya18616.jpg</p>
-		                    </li>
-		                    <li>
-		                        <a href="###">
-		                            <img src="../img/cctv_3.jpg" alt="">
-		                        </a>
-		                        <p>海港六號</p>
-		                    </li>
-		                    <li>
-		                        <a href="###">
-		                            <img src="../img/cctv_4.jpg" alt="">
-		                        </a>
-		                        <p>東南亞夫開源號</p>
-		                    </li>
-		                    <li>
-		                        <a href="###">
-		                            <img src="../img/cctv_5.jpg" alt="">
-		                        </a>
-		                        <p>Paris</p>
-		                    </li>
-		                </ul>
-		                
-		            </div>
-		            <!-- 觀看影片區塊 -->
-		            <div class="video-box" id="pageViewVideo" style="display:;">
-		                <ul class="photo-list">
-		                    <li> 
-		                        <a href="https://www.youtube.com/watch?v=rvj8Le19iRI" target="_blank">
-		                            <img src="../img/cctv_8.jpg" alt="">
-		                        </a>
-		                        <p>事故影片</p>
-		                    </li>
-		                    <li>
-		                        <a href="https://www.youtube.com/watch?v=rvj8Le19iRI" target="_blank">
-		                            <img src="../img/cctv_7.jpeg" alt="">
-		                        </a>
-		                        <p>20210501_test.mp4</p>
-		                    </li>
-		                    
-		                </ul>
-		            </div>
-		
-		            <div class="btn-area">
-		                <div class="btn btn-cancel" id="btnViewBack">
-		                    <i class="fa fa-chevron-left"></i> 返回
-		                </div>
-		                <div class="btn btn-submit" id="btnEdit">
-		                    <i class="fad fa-edit"></i> 編輯內容
-		                    <input type="submit" class="btn">
-		                </div>
-		            </div>
-		        </div>
+				<div class="inline-cont">
+					<div class="sub-page">
+						<ul>
+							<li class="js-page-live">
+								<a href="#">影像即時觀看</a>
+							</li>
+							<li class="js-page-video act">
+								<a href="#">影像管理</a>
+							</li>
+						</ul>
+					</div>
+					<h3>
+						檢視事件影像
+					</h3>
+					<div class="input-box">
+						<label>地點</label>
+						<span id="CCTVMLocation"></span>
+					</div>
+					<div class="input-box">
+						<label>船名</label>
+						<span id="CCTVMShipname"></span>
+					</div>
+					<div class="input-box">
+						<label>事件名稱</label>
+						<span id="CCTVMEvent"></span>
+					</div>
+					<div class="input-box icon-right">
+						<label>時間</label>
+						<span id="CCTVMTime"></span>
+					</div>
+					<div class="input-box w">
+						<label>備註</label>
+						<span id="CCTVMRemark"></span>
+					</div>
+					<div class="input-box w">
+						<label>UUID</label>
+						<span id="CCTVMUUID" style="display:none;"></span>
+					</div>
+
+					<div class="tab-box">
+						<span id="btnViewVideo" class="act">事件影片集</span><span id="btnViewPhoto">事件照片集</span>
+					</div>
+					<!-- 觀看相片區塊 -->
+					<div class="photo-box" id="pageViewPhoto" style="display:none;">
+						<ul class="photo-list" id="CCTV-GetShowPic-Anchor-point2" >
+							
+						</ul>
+
+					</div>
+					<!-- 觀看影片區塊 -->
+					<div class="video-box" id="pageViewVideo" style="display:;">
+						<ul class="photo-list video-list" id="CCTV-GetShowFilm-Anchor-point2">
+							
+						</ul>
+					</div>
+
+					<div class="btn-area">
+						<div class="btn btn-cancel" id="btnViewBack">
+							<i class="fa fa-chevron-left"></i> 返回
+						</div>
+						<div class="btn btn-submit" id="btnEdit">
+							<i class="fad fa-edit"></i> 編輯內容
+							<input type="button" class="btn">
+						</div>
+					</div>
+				</div>
 		        
 		    </div>
 		    <link rel="stylesheet" href="../css/swiper-bundle.min.css">
@@ -3365,18 +3230,6 @@
 		                $(this).addClass('act');
 		                $('#pageViewPhoto').hide();
 		                $('#pageViewVideo').show();
-		            });
-		
-		            // 前往編輯
-		            $('#btnEdit').on('click',function(){
-		                $('#videoList,#videoOnlyView').hide();
-		                $('#videoEdit').show();
-		            });
-		
-		            //刪除
-		            $('.del-photo').on('click',function(){
-		                $(this).parent().remove();
-		                console.log('刪除')
 		            });
 		
 		            $('#btnAddCancel').on('click',function(){
@@ -3445,15 +3298,13 @@
 		
 		            //20210625 韶元加入
 					//影像管理查詢搜尋按鈕 Search
-					$("#Search").on('click', function () {
-		                var Flag = $('input:radio[name="search"]:checked').val();
-		                var StartDate = $('#dateStart').val();
-		                var EndDate = $('#dateEnd').val();
-		                var KeyWord = $('#keyWord').val();
-		                var Type = $('#SearchType').val();
-		
-		                console.log("Flag: " + Flag + ". StartDate: " + StartDate + ". EndDate: " + EndDate + ". KeyWord: " + KeyWord + ". Type: " + Type+ "");
-		                CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
+
+                    // 前往編輯
+					$('#btnEdit').on('click', function () {
+                        var UUID = $('#CCTVMUUID').html();
+                        GetEditData(UUID);
+                        $('#videoList,#videoOnlyView').hide();
+                        $('#videoEdit').show();
 					});
 		
 					//查詢按鈕
@@ -3462,15 +3313,25 @@
 						var InnerUnit = $('#InnerUnitsel').val();
 						BtnCCTVQuery(Unit, InnerUnit);
 					});
-		
+
+					//影片上傳
 					$("#btnUpload").click(function () {
 		
 						let hostOrigion = "http://localhost";
-						var url = "/vtsApi/api/CCTV/UploadFiles";
+                        var url = "/vtsApi/api/CCTV/UploadFiles";
 						var Url = hostOrigion + url;
-		
-						var data = new FormData($('#upload_form')[0]);
-		
+
+                        //## 宣告一個FormData
+						var data = new FormData();
+                        //## 將檔案append FormData
+                        var fileUpload = $("#Filmfile").get(0);
+						var files = fileUpload.files;
+                        // Looping over all files and add it to FormData object  
+                        for (var i = 0; i < files.length; i++) {
+                            data.append(files[i].name, files[i]);
+                        }
+                        data.append("CCTVListUUID", $('#UUID').val());
+
 						$.ajax({
 							type: "POST",
 							url: Url,    // CALL WEB API TO SAVE THE FILES.
@@ -3482,6 +3343,8 @@
 							success: function (data, textStatus, xhr) {
 								$("#fileProgress").hide();
 								$('p').text(data);
+
+								GetShowFilm($('#UUID').val() , "Edit");
 							},
 							error: function (XMLHttpRequest, textStatus, errorThrown) {
 								alert(textStatus + ': ' + errorThrown);
@@ -3489,10 +3352,10 @@
 							xhr: function () {
 								var fileXhr = $.ajaxSettings.xhr();
 								if (fileXhr.upload) {
-									$("progress").show();
-									fileXhr.upload.addEventListener("progress", function (e) {
+                                    $("Progress").show();
+                                    fileXhr.upload.addEventListener("Progress", function (e) {
 										if (e.lengthComputable) {
-											$("#fileProgress").attr({
+                                            $("#fileProgress").attr({
 												value: e.loaded,
 												max: e.total
 											});
@@ -3503,7 +3366,60 @@
 							}
 						});
 					});
-		
+
+					//照片上傳
+					$("#btnPicUpload").click(function () {
+ 
+                        let hostOrigion = "http://localhost";
+                        var url = "/vtsApi/api/CCTV/PicUploadFiles";
+                        var Url = hostOrigion + url;
+
+                        //## 宣告一個FormData
+                        var data = new FormData();
+                        //## 將檔案append FormData
+                        var fileUpload = $("#Picfile").get(0);
+                        var files = fileUpload.files;
+                        // Looping over all files and add it to FormData object  
+                        for (var i = 0; i < files.length; i++) {
+                            data.append(files[i].name, files[i]);
+                        }
+                        data.append("CCTVListUUID", $('#UUID').val());
+
+                        $.ajax({
+                            type: "POST",
+                            url: Url,    // CALL WEB API TO SAVE THE FILES.
+                            enctype: 'multipart/form-data',
+                            contentType: false,
+                            processData: false,         // PREVENT AUTOMATIC DATA PROCESSING.
+                            cache: false,
+                            data: data, 		        // DATA OR FILES IN THIS CONTEXT.
+                            success: function (data, textStatus, xhr) {
+                                $("#PicfileProgress").hide();
+                                $('p').text(data);
+
+                                GetShowPic($('#UUID').val() , "Edit");
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert(textStatus + ': ' + errorThrown);
+                            },
+                            xhr: function () {
+                                var fileXhr = $.ajaxSettings.xhr();
+                                if (fileXhr.upload) {
+                                    $("progress").show();
+                                    fileXhr.upload.addEventListener("progress", function (e) {
+                                        if (e.lengthComputable) {
+                                            $("#PicfileProgress").attr({
+                                                value: e.loaded,
+                                                max: e.total
+                                            });
+                                        }
+                                    }, false);
+                                }
+                                return fileXhr;
+                            }
+                        });
+					});
+
 		            const videoArr = document.querySelectorAll('.video-list li');
 		            //控制影片播放
 		            //cctv mouse over 播放影片
@@ -3720,7 +3636,6 @@
 		// }, 6000);
 		$(window).on("load", function () {
 
-
 			var firstPoint = $("#onePoint").position().top;
 			var secondPoint = $("#twoPoint").position().top;
 			var thirdPoint = $("#threePoint").position().top;
@@ -3754,7 +3669,49 @@
 				console.log("move")
 			})
 
-		})
+            //20210625 韶元加入
+            //影像管理新增影像按鈕
+            $('#btnSubmitVideoAdd').on('click', function () {
+
+                var local = $('#local').val();
+                var dateTime = $('#dateTime').val();
+				if (!checkInputDate(dateTime)) {
+					$('#dateTime').val("");
+					return;
+				} else
+				{
+                    var shipName = $('#shipName').val();
+                    var eventName = $('#eventName').val();
+                    var Uploader = "";
+                    var Type = "";
+                    var addNoteMesg = $('#addNoteMesg').val();
+
+                    InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg);
+
+                    $('#videoList').show();
+                    $('#live,#videoAdd').hide();
+				}
+            });
+
+            //影像管理查詢搜尋按鈕 Search
+            $("#VideoSearch").on('click', function () {
+                var Flag = $('input:radio[name="search"]:checked').val();
+                var StartDate = $('#dateStart').val();
+                var EndDate = $('#dateEnd').val();
+				if (!checkInputDate(StartDate) || !checkInputDate(EndDate)) {
+					$('#dateStart').val("");
+					$('#dateEnd').val("");
+					return false;
+				} else
+				{
+                    var KeyWord = $('#keyWord').val();
+                    var Type = $('#SearchType').val();
+
+                    console.log("Flag: " + Flag + ". StartDate: " + StartDate + ". EndDate: " + EndDate + ". KeyWord: " + KeyWord + ". Type: " + Type + "");
+                    CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
+				}
+            });
+        });
 
 		// let screenLog = document.querySelector('#screen-log');
 		// document.addEventListener('mousemove', logKey);
