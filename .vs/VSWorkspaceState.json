@@ -2,8 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\js",
+<<<<<<< HEAD
     "\\picture"
   ],
   "SelectedNode": "\\js\\MtNetCCTV.js",
+=======
+    "\\views"
+  ],
+  "SelectedNode": "\\views\\siitech_index.html",
+>>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
   "PreviewInSolutionExplorer": false
 }

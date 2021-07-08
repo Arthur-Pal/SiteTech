@@ -2923,10 +2923,57 @@
 		                </li>
 		                <!-- 編輯時 要可以上傳影片或相片 -->
 		                <li id="CCTVManager-Anchor-point">
+<<<<<<< HEAD
 		                   
 		                </li>	
 		            </ul>
 		            
+=======
+		                    <!--<div class="group-box-83">
+		                        <div class="box-5 txt-c">3</div>
+		                        <div class="box-10">2014/01/01</div>
+		                        <div class="box-10">基隆港</div>
+		                        <div class="box-15">拋錨</div>
+		                        <div class="box-15 txt-c">大船頭1號</div>
+		                        <div class="box-10 txt-c">truesun</div>
+		                        <div class="box-10 txt-c">影片</div>
+		                        <div class="box-20">涉及多艘船，且多數船皆已全毀，但無人傷亡</div>
+		                    </div>
+		                    <div class="group-box-15 opera">
+		                        <a href="#" title="檢視" alt="檢視" class="js-views-only">
+		                            <i class="fad fa-eye"></i>
+		                        </a>
+		                        <a href="###" title="編輯" alt="編輯" class="js-page-edit">
+		                            <i class="fad fa-pen-square"></i>
+		                        </a>
+		                        <a href="#" title="刪除" alt="刪除" class="js-del-confirm">
+		                            <i class="fad fa-times-square"></i>
+		                        </a>
+		                    </div>-->
+		                </li>	
+		            </ul>
+		            <!--<div class="pagination">
+		                <div class="pagination-numbers">
+		                    <a href="#" title="第一頁">
+		                        <i class="fas fa-arrow-to-left"></i>
+		                    </a>
+		                    <a href="#" title="上一頁">
+		                        <i class="fas fa-arrow-left"></i>
+		                    </a>
+		                    <a href="#">1</a>
+		                    <a href="#">2</a>
+		                    <a href="#" title="" class="act">3</a>
+		                    <a href="#">4</a>
+		                    <a href="#">5</a>
+		                    <a href="#" title="下一頁">
+		                        <i class="fas fa-arrow-right"></i>
+		                    </a>
+		                    <a href="#" title="最後頁">
+		                        <i class="fas fa-arrow-to-right"></i>
+		                    </a>
+		                </div>
+		            </div>-->
+>>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
 					<div class="pagination">
 						<div class="pagination-numbers">
 							<ul id="pagination0"></ul>
@@ -3682,8 +3729,13 @@
 				{
                     var shipName = $('#shipName').val();
                     var eventName = $('#eventName').val();
+<<<<<<< HEAD
                     var Uploader = "";
                     var Type = "";
+=======
+                    var Uploader = "勇者";
+                    var Type = "照片";
+>>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
                     var addNoteMesg = $('#addNoteMesg').val();
 
                     InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg);
@@ -3711,6 +3763,57 @@
                     CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
 				}
             });
+<<<<<<< HEAD
+=======
+
+            //查詢按鈕
+            $("#btnQuery").on('click', function () {
+                var Unit = $('#Unitsel').val();
+                var InnerUnit = $('#InnerUnitsel').val();
+                BtnCCTVQuery(Unit, InnerUnit);
+            });
+
+            $("#btnUpload").click(function () {
+
+                let hostOrigion = "http://localhost";
+                var url = "/vtsApi/api/CCTV/UploadFiles";
+                var Url = hostOrigion + url;
+
+                var data = new FormData($('#upload_form')[0]);
+
+                $.ajax({
+                    type: "POST",
+                    url: Url,    // CALL WEB API TO SAVE THE FILES.
+                    enctype: 'multipart/form-data',
+                    contentType: false,
+                    processData: false,         // PREVENT AUTOMATIC DATA PROCESSING.
+                    cache: false,
+                    data: data, 		        // DATA OR FILES IN THIS CONTEXT.
+                    success: function (data, textStatus, xhr) {
+                        $("#fileProgress").hide();
+                        $('p').text(data);
+                    },
+                    //error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    //	alert(textStatus + ': ' + errorThrown);
+                    //},
+                    xhr: function () {
+                        var fileXhr = $.ajaxSettings.xhr();
+                        if (fileXhr.upload) {
+                            $("progress").show();
+                            fileXhr.upload.addEventListener("progress", function (e) {
+                                if (e.lengthComputable) {
+                                    $("#fileProgress").attr({
+                                        value: e.loaded,
+                                        max: e.total
+                                    });
+                                }
+                            }, false);
+                        }
+                        return fileXhr;
+                    }
+                });
+            });
+>>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
         });
 
 		// let screenLog = document.querySelector('#screen-log');
