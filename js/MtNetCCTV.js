@@ -123,93 +123,41 @@ function LoadCCTVManagement()
         contentType: "application/json; charset=utf-8",
 
         success: function (data) {
-<<<<<<< HEAD
-=======
-            if (data.length <= 0) {
-                alert("查無資料");
-                return;
-            }
-
-            if (data.length > 0) {
-               // console.log("data.length :" + data.length + "")
-                for (var i = 0; i < data.length; i++) {
-            
-                    // 添加下方影片圖像List
-                    //var txt1 = '<div class="group-box-83">';
-                    //var txt2 = '<div class="box-5 txt-c">' + data[i].ID + '</div>';
-                    //var txt3 = '<div class="box-10">' + data[i].Time + '</div>';
-                    //var txt4 = '<div class="box-10">' + data[i].Location + '</div>';
-                    //var txt5 = '<div class="box-15">' + data[i].EventName + '</div>';
-                    //var txt6 = '<div class="box-15 txt-c">' + data[i].ShipName + '</div>';
-                    //var txt7 = '<div class="box-10 txt-c">' + data[i].Uploader + '</div>';
-                    //var txt8 = '<div class="box-10 txt-c">' + data[i].Type + '</div>';
-                    //var txt9 = '<div class="box-20">' + data[i].Remark + '</div>';
-                    //var txt10 = '</div>';
-                    //var txt11 = '<div class="group-box-15 opera">';
-                    //var txt12 = '<a href="###" title="檢視" alt="檢視" class="js-views-only">';
-                    //var txt13 = '<i class="fad fa-eye"></i>';
-                    //var txt14 = '</a>';
-                    //var txt15 = '<a href="###" title="編輯" alt="編輯" class="js-page-edit">';
-                    //var txt16 = '<i class="fad fa-pen-square"></i>';
-                    //var txt17 = '</a>';
-                    //var txt18 = '<a href="###" title="刪除" alt="刪除" class="js-page-delete" value="' + data[i].ID +'">';
-                    //var txt19 = '<i class="fad fa-times-square"></i>';
-                    //var txt20 = '</a>';
-                    //var txt21 = '</div>';
-                    //var allPhoto = txt1 + txt2 + txt3 + txt4 + txt5 + txt6 + txt7 + txt8 + txt9 + txt10 + txt11 + txt12 + txt13 + txt14 + txt15 + txt16 +
-                    //    txt17 + txt18 + txt19 + txt20 + txt21;
-                    ////console.log("allPhoto :" + allPhoto + "")
-                    //$('#CCTVManager-Anchor-point').append(allPhoto);
-                }
-            }
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
 
             if (data.length > 0) {
 
-<<<<<<< HEAD
                 display_pages("Init", data, data.length, 1)
 
                 // 列表點查看
-                $('.js-views-only').on('click', function () {
-                    $('#videoOnlyView').show();
-                    $('#live,#videoAdd,#videoList').hide();
-                });
+                //$('.js-views-only').on('click', function () {
+                //    $('#videoOnlyView').show();
+                //    $('#live,#videoAdd,#videoList').hide();
+                //});
 
-                // 列表點編輯
-                $('.js-page-edit').on('click', function () {
-                    $('#videoEdit').show();
-                    $('#live,#videoAdd,#videoList').hide();
-                });
+                //// 列表點編輯
+                //$('.js-page-edit').on('click', function () {
+                //    $('#videoEdit').show();
+                //    $('#live,#videoAdd,#videoList').hide();
+                //});
 
-                // 列表點刪除
-                $('.js-page-delete').on('click', function () {
-                    if (confirm("真的要刪除嗎?")) {
-                        var id = $(this).attr("value");
-                        CCTVManagerListDelete(id);
-                    }
-                });
+                //// 列表點刪除
+                //$('.js-page-delete').on('click', function () {
+                //    if (confirm("真的要刪除嗎?1")) {
+                //        var id = $(this).attr("value");
+                //        CCTVManagerListDelete(id);
+                //    }
+                //});
             }         
-=======
-            // 列表點刪除
-            $('.js-page-delete').on('click', function () {
-                if (confirm("真的要刪除嗎?")) {
-                    var id = $(this).attr("value");
-                    CCTVManagerListDelete(id);
-                }
-            });
-
-            display_pages("Init", data , data.length, 1)
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
         }
     });
 }
 
 //刪除影像管理List
-function CCTVManagerListDelete(id)
+function CCTVManagerListDelete(UUID)
 {
     console.log("Enter Delete");
     let hostOrigion = "http://localhost";
-    var url = "/vtsApi/api/CCTV/DeleteCCTVManageList/?id=" + id + "";
+    var url = "/vtsApi/api/CCTV/DeleteCCTVManageList/?UUID=" + UUID + "";
     var Url = hostOrigion + url;
 
     $.ajax({
@@ -277,7 +225,7 @@ function CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type)
                     var txt15 = '<a href="###" title="編輯" alt="編輯" class="js-page-edit value="' + data[i].UUID + '"">';
                     var txt16 = '<i class="fad fa-pen-square"></i>';
                     var txt17 = '</a>';
-                    var txt18 = '<a href="###" title="刪除" alt="刪除" class="js-page-delete" value="' + data[i].ID + '">';
+                    var txt18 = '<a href="###" title="刪除" alt="刪除" class="js-page-delete" value="' + data[i].UUID + '">';
                     var txt19 = '<i class="fad fa-times-square"></i>';
                     var txt20 = '</a>';
                     var txt21 = '</div>';
@@ -290,36 +238,29 @@ function CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type)
 
             // 列表點查看
             $('.js-views-only').on('click', function () {
-<<<<<<< HEAD
                 var UUID = $(this).attr("value");
                 GetViewData(UUID);
-=======
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
                 $('#videoOnlyView').show();
                 $('#live,#videoAdd,#videoList').hide();
             });
 
             // 列表點編輯
             $('.js-page-edit').on('click', function () {
-<<<<<<< HEAD
                 var UUID = $(this).attr("value");
                 GetEditData(UUID);
-=======
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
                 $('#videoEdit').show();
                 $('#live,#videoAdd,#videoList').hide();
             });
 
             // 列表點刪除
             $('.js-page-delete').on('click', function () {
-                if (confirm("真的要刪除嗎?")) {
+                if (confirm("真的要刪除嗎? 這會將列表資料 , 以及影片 , 照片檔都刪除.")) {
                     var id = $(this).attr("value");
                     CCTVManagerListDelete(id);
                 }
             });
 
             display_pages("Query", data, data.length, 1)
-<<<<<<< HEAD
         }
     });
 }
@@ -390,9 +331,9 @@ function display_pages(state, Qdata , totalCounts, current_page) {
 
                     // 列表點刪除
                     $('.js-page-delete').on('click', function () {
-                        if (confirm("真的要刪除嗎?")) {
-                            var id = $(this).attr("value");
-                            CCTVManagerListDelete(id);
+                        if (confirm("真的要刪除嗎? 這會將列表資料 , 以及影片 , 照片檔都刪除.")) {
+                            var UUID = $(this).attr("value");
+                            CCTVManagerListDelete(UUID);
                         }
                     });
                 },
@@ -427,7 +368,7 @@ function renderTableCCTVManagermentList(data) {
         var txt15 = '<a href="###" title="編輯" alt="編輯" class="js-page-edit" value="' + data[i].UUID + '">';
         var txt16 = '<i class="fad fa-pen-square"></i>';
         var txt17 = '</a>';
-        var txt18 = '<a href="###" title="刪除" alt="刪除" class="js-page-delete" value="' + data[i].ID + '">';
+        var txt18 = '<a href="###" title="刪除" alt="刪除" class="js-page-delete" value="' + data[i].UUID + '">';
         var txt19 = '<i class="fad fa-times-square"></i>';
         var txt20 = '</a>';
         var txt21 = '</div>';
@@ -478,15 +419,45 @@ function InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type,
         },
         error: function (error) {
             alert('error Fail Insert Data');
-=======
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
         }
     });
-}
 
-<<<<<<< HEAD
     $('#CCTVManager-Anchor-point').empty();
     LoadCCTVManagement();
+}
+
+//修改影像管理List
+function UpdateCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg , UUID)
+{
+    let hostOrigion = "http://localhost";
+    var url = "/vtsApi/api/CCTV/UpdateCCTVData";
+    var Url = hostOrigion + url;
+
+    var VO = {
+        Location: local,
+        Time: dateTime,
+        shipName: shipName,
+        eventName: eventName,
+        Uploader: Uploader,
+        Type: Type,
+        Remark: addNoteMesg,
+        UUID: UUID
+    };
+
+    $.ajax({
+        url: Url,
+        type: "POST",
+        async: false,
+        dataType: "json",
+        data: JSON.stringify(VO),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            alert('success Update Data');
+        },
+        error: function (error) {
+            alert('error Update Insert Data');
+        }
+    });
 }
 
 //取得檔案檢視
@@ -670,161 +641,38 @@ function GetShowPic(CCTVListUUID, event)
         },
         error: function (error) {
             alert('Fail GetShowFilm');
-=======
-/* 
-    分頁組件展示 
-    total_pages: 總頁數；
-    visible_pages： 讓組件展示10頁；
-    current_page: 當前頁
-*/
-function display_pages(state, Qdata , totalCounts, current_page) {
-    $("#pagination0").jqPaginator({
-        totalCounts: totalCounts,
-        pageSize: 10,  //每頁顯示的數據量
-        currentPage: current_page,
-        first: '<a href="javascript:; class="first"">首頁</a>',
-        prev: '<a href="javascript:;" class="prev">上一頁</a>',
-        next: '<a href="javascript:;" class="next">下一頁</a>',
-        last: '<a href="javascript:;" class="last">末頁</a>',
-        page: '<a href="javascript:;" class="page">{{page}}</a>',
-        onPageChange: function (page, type) {
-            var U_limit = String(page) + 0;
-            var L_limit = Number(String(page) + 0) - 9;
-
-            let hostOrigion = "http://localhost";
-            var url = "/vtsApi/api/CCTV/PageChange";
-            var Url = hostOrigion + url;
-
-            var VO = {
-                U_limit: U_limit,
-                L_limit: L_limit
-            };
-
-            $.ajax({
-                url: Url,
-                type: "POST",
-                async: false,
-                dataType: "json",
-                data: JSON.stringify(VO),
-                contentType: "application/json; charset=utf-8",
-                success: function (Rtdata) {
-                    $('#CCTVManager-Anchor-point').empty();
-                    if (state == "Init")
-                    {
-                        renderTableCCTVManagermentList(Rtdata);
-                    }
-
-                    if (state == "Query")
-                    {
-                        renderTableCCTVManagermentList(Qdata);
-                    }
-
-                    // 列表點查看
-                    $('.js-views-only').on('click', function () {
-                        $('#videoOnlyView').show();
-                        $('#live,#videoAdd,#videoList').hide();
-                    });
-
-                    // 列表點編輯
-                    $('.js-page-edit').on('click', function () {
-                        $('#videoEdit').show();
-                        $('#live,#videoAdd,#videoList').hide();
-                    });
-
-                    // 列表點刪除
-                    $('.js-page-delete').on('click', function () {
-                        if (confirm("真的要刪除嗎?")) {
-                            var id = $(this).attr("value");
-                            CCTVManagerListDelete(id);
-                        }
-                    });
-                },
-                error: function (error) {
-                    alert('error; ' + eval(error));
-                }
-            });
         }
     });
 }
 
-//渲染申請列表表格
-function renderTableCCTVManagermentList(data) {
-    console.log("renderTableCCTVManagermentList enter  data.length : " + data.length + "")
-
-    for (var i = 0; i < data.length; i++) {
-        // 添加下方影片圖像List
-        var txt1 = '<div class="group-box-83">';
-        var txt2 = '<div class="box-5 txt-c">' + data[i].ID + '</div>';
-        var txt3 = '<div class="box-10">' + data[i].Time + '</div>';
-        var txt4 = '<div class="box-10">' + data[i].Location + '</div>';
-        var txt5 = '<div class="box-15">' + data[i].EventName + '</div>';
-        var txt6 = '<div class="box-15 txt-c">' + data[i].ShipName + '</div>';
-        var txt7 = '<div class="box-10 txt-c">' + data[i].Uploader + '</div>';
-        var txt8 = '<div class="box-10 txt-c">' + data[i].Type + '</div>';
-        var txt9 = '<div class="box-20">' + data[i].Remark + '</div>';
-        var txt10 = '</div>';
-        var txt11 = '<div class="group-box-15 opera">';
-        var txt12 = '<a href="###" title="檢視" alt="檢視" class="js-views-only">';
-        var txt13 = '<i class="fad fa-eye"></i>';
-        var txt14 = '</a>';
-        var txt15 = '<a href="###" title="編輯" alt="編輯" class="js-page-edit">';
-        var txt16 = '<i class="fad fa-pen-square"></i>';
-        var txt17 = '</a>';
-        var txt18 = '<a href="###" title="刪除" alt="刪除" class="js-page-delete" value="' + data[i].ID + '">';
-        var txt19 = '<i class="fad fa-times-square"></i>';
-        var txt20 = '</a>';
-        var txt21 = '</div>';
-        var allPhoto = txt1 + txt2 + txt3 + txt4 + txt5 + txt6 + txt7 + txt8 + txt9 + txt10 + txt11 + txt12 + txt13 + txt14 + txt15 + txt16 +
-            txt17 + txt18 + txt19 + txt20 + txt21;
-        $('#CCTVManager-Anchor-point').append(allPhoto);
+function checkFilmfile(sender) {
+    // 可接受的附檔名
+    var validExts = new Array(".mp4", ".webm");
+    if (sender.value == null) {
+        return;
     }
+    var fileExt = sender.value;
+    fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+    if (validExts.indexOf(fileExt) < 0) {
+        sender.value = null;
+        alert("檔案類型錯誤，可接受的副檔名有：" + validExts.toString());
+        return;
+    }
+    else return true;
 }
 
-//檢查日期格式
-function checkInputDate(obj) {
-    var t = Date.parse(obj);
-    if (isNaN(t)) {
-        alert("日期格式錯誤，請重新輸入！");
-        return false;
+function checkPicfile(sender) {
+    // 可接受的附檔名
+    var validExts = new Array(".png", ".jpg", ".jpeg");
+    if (sender.value == null) {
+        return;
     }
-
-    return true;
-}
-
-//新增影像管理List
-function InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg) {
-    console.log("InsertCCTVManager local: " + local + " dateTime : " + dateTime + " shipName : " + shipName + " eventName : " + eventName + " Uploader : " + Uploader + " Type : " + Type + " addNoteMesg : " + addNoteMesg + "")
-
-    let hostOrigion = "http://localhost";
-    var url = "/vtsApi/api/CCTV/InsertCCTVData";
-    var Url = hostOrigion + url;
-
-    var VO = {
-        Location: local,
-        Time: dateTime,
-        shipName: shipName,
-        eventName: eventName,
-        Uploader: Uploader,
-        Type: Type,
-        Remark: addNoteMesg
-    };
-
-    $.ajax({
-        url: Url,
-        type: "POST",
-        async: false,
-        dataType: "json",
-        data: JSON.stringify(VO),
-        contentType: "application/json; charset=utf-8",
-        success: function (data) {
-            alert('success Insert Data');
-        },
-        error: function (error) {
-            alert('error Fail Insert Data');
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
-        }
-    });
-
-    $('#CCTVManager-Anchor-point').empty();
-    LoadCCTVManagement();
+    var fileExt = sender.value;
+    fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+    if (validExts.indexOf(fileExt) < 0) {
+        sender.value = null;
+        alert("檔案類型錯誤，可接受的副檔名有：" + validExts.toString());
+        return;
+    }
+    else return true;
 }

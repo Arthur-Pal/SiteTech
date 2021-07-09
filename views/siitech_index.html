@@ -2890,10 +2890,10 @@
 		                            <span>類型：</span>
 		                        </label>
 								<select type="text" name="" id="SearchType" value="" class="select-sty w150">
-									<option value="">全部</option>
-									<option value="">照片與影片</option>
-									<option value="">照片</option>
-									<option value="">影片</option>
+									<option value="全部">全部</option>
+									<option value="照片影片">照片影片</option>
+									<option value="照片">照片</option>
+									<option value="影片">影片</option>
 								</select>
 		                    </div>
 		                    
@@ -2923,57 +2923,10 @@
 		                </li>
 		                <!-- 編輯時 要可以上傳影片或相片 -->
 		                <li id="CCTVManager-Anchor-point">
-<<<<<<< HEAD
 		                   
 		                </li>	
 		            </ul>
 		            
-=======
-		                    <!--<div class="group-box-83">
-		                        <div class="box-5 txt-c">3</div>
-		                        <div class="box-10">2014/01/01</div>
-		                        <div class="box-10">基隆港</div>
-		                        <div class="box-15">拋錨</div>
-		                        <div class="box-15 txt-c">大船頭1號</div>
-		                        <div class="box-10 txt-c">truesun</div>
-		                        <div class="box-10 txt-c">影片</div>
-		                        <div class="box-20">涉及多艘船，且多數船皆已全毀，但無人傷亡</div>
-		                    </div>
-		                    <div class="group-box-15 opera">
-		                        <a href="#" title="檢視" alt="檢視" class="js-views-only">
-		                            <i class="fad fa-eye"></i>
-		                        </a>
-		                        <a href="###" title="編輯" alt="編輯" class="js-page-edit">
-		                            <i class="fad fa-pen-square"></i>
-		                        </a>
-		                        <a href="#" title="刪除" alt="刪除" class="js-del-confirm">
-		                            <i class="fad fa-times-square"></i>
-		                        </a>
-		                    </div>-->
-		                </li>	
-		            </ul>
-		            <!--<div class="pagination">
-		                <div class="pagination-numbers">
-		                    <a href="#" title="第一頁">
-		                        <i class="fas fa-arrow-to-left"></i>
-		                    </a>
-		                    <a href="#" title="上一頁">
-		                        <i class="fas fa-arrow-left"></i>
-		                    </a>
-		                    <a href="#">1</a>
-		                    <a href="#">2</a>
-		                    <a href="#" title="" class="act">3</a>
-		                    <a href="#">4</a>
-		                    <a href="#">5</a>
-		                    <a href="#" title="下一頁">
-		                        <i class="fas fa-arrow-right"></i>
-		                    </a>
-		                    <a href="#" title="最後頁">
-		                        <i class="fas fa-arrow-to-right"></i>
-		                    </a>
-		                </div>
-		            </div>-->
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
 					<div class="pagination">
 						<div class="pagination-numbers">
 							<ul id="pagination0"></ul>
@@ -3087,11 +3040,11 @@
 						<div class="upload-video-group">
 							<div class="upload-box">
 								<form id="Pic_upload_form" action="">
-									<label for="uploadInput">上傳照片</label>
+									<label for="uploadInput">上傳照片(可批次上傳多筆)</label>
 									<div class="btn-upload">
 										<!-- 這邊class拿掉 btn btn-green upload-plus 可刪-->
 										<!-- <i class="fas fa-plus"></i> 選擇影片 可刪-->
-										<input type="file" id="Picfile" name="Picfile" value=""/>
+										<input type="file" id="Picfile" accept=".png,.jpg,.jpeg" name="Picfile" value="" onchange="checkPicfile(this);" multiple/>
 									</div>
 									<div class="btn btn-submit" id="btnPicUpload">
 										<i class="fad fa-upload"></i> 確定上傳
@@ -3118,7 +3071,7 @@
 									<div class="btn-upload">
 										<!-- 這邊class拿掉 btn btn-green upload-plus 可刪-->
 										<!-- <i class="fas fa-plus"></i> 選擇影片 可刪-->
-										<input type="file" id="Filmfile" name="file" value=""/>
+										<input type="file" id="Filmfile" accept=".mp4,.webm" name="file" value="" onchange="checkFilmfile(this);"/>
 									</div>
 									<div class="btn btn-submit" id="btnUpload">
 										<i class="fad fa-upload"></i> 確定上傳
@@ -3135,11 +3088,11 @@
 
 					<div class="btn-area">
 						<div class="btn btn-cancel" id="btnEditCancel">
-							<i class="fa fa-chevron-left"></i> 取消
+							<i class="fa fa-chevron-left"></i> 返回
 						</div>
-						<div class="btn btn-submit" id="btnSubmitVideoAdd">
+						<div class="btn btn-submit" id="btnSubmitVideoEdit">
 							<i class="fa fa-check"></i> 確認修改
-							<input type="submit" class="btn">
+							<input type="button" class="btn">
 						</div>
 					</div>
 				</div>
@@ -3283,10 +3236,7 @@
 		                $('#videoList').show();
 		                $('#videoAdd').hide();
 		            });
-		            $('#btnEditCancel').on('click',function(){
-		                $('#videoList').show();
-		                $('#videoEdit').hide();
-		            });
+		     
 		            $('#btnViewBack').on('click',function(){
 		                $('#videoList').show();
 		                $('#videoOnlyView').hide();
@@ -3344,7 +3294,11 @@
 		            });
 		
 		            //20210625 韶元加入
-					//影像管理查詢搜尋按鈕 Search
+					$('#btnEditCancel').on('click', function () {
+						LoadCCTVManagement();
+                        $('#videoList').show();
+                        $('#videoEdit').hide();
+					});
 
                     // 前往編輯
 					$('#btnEdit').on('click', function () {
@@ -3399,8 +3353,8 @@
 							xhr: function () {
 								var fileXhr = $.ajaxSettings.xhr();
 								if (fileXhr.upload) {
-                                    $("Progress").show();
-                                    fileXhr.upload.addEventListener("Progress", function (e) {
+                                    $("#fileProgress").show();
+                                    fileXhr.upload.addEventListener("#fileProgress", function (e) {
 										if (e.lengthComputable) {
                                             $("#fileProgress").attr({
 												value: e.loaded,
@@ -3452,8 +3406,8 @@
                             xhr: function () {
                                 var fileXhr = $.ajaxSettings.xhr();
                                 if (fileXhr.upload) {
-                                    $("progress").show();
-                                    fileXhr.upload.addEventListener("progress", function (e) {
+                                    $("#PicfileProgress").show();
+                                    fileXhr.upload.addEventListener("#PicfileProgress", function (e) {
                                         if (e.lengthComputable) {
                                             $("#PicfileProgress").attr({
                                                 value: e.loaded,
@@ -3729,13 +3683,8 @@
 				{
                     var shipName = $('#shipName').val();
                     var eventName = $('#eventName').val();
-<<<<<<< HEAD
                     var Uploader = "";
                     var Type = "";
-=======
-                    var Uploader = "勇者";
-                    var Type = "照片";
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
                     var addNoteMesg = $('#addNoteMesg').val();
 
                     InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg);
@@ -3745,75 +3694,52 @@
 				}
             });
 
+            //影像管理新增影像按鈕
+			$('#btnSubmitVideoEdit').on('click', function () {
+				console.log("修改檔案");
+                var local = $('#editLocal').val();
+                var dateTime = $('#editDateTime').val();
+                if (!checkInputDate(dateTime)) {
+                    $('#editDateTime').val("");
+                    return;
+                } else {
+                    var shipName = $('#editShipName').val();
+                    var eventName = $('#editEventName').val();
+                    var Uploader = "";
+                    var Type = "";
+					var addNoteMesg = $('#noteMesg').val();
+                    var UUID = $('#UUID').val();
+
+                    UpdateCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg , UUID);
+                }
+			});
+
             //影像管理查詢搜尋按鈕 Search
             $("#VideoSearch").on('click', function () {
                 var Flag = $('input:radio[name="search"]:checked').val();
                 var StartDate = $('#dateStart').val();
-                var EndDate = $('#dateEnd').val();
-				if (!checkInputDate(StartDate) || !checkInputDate(EndDate)) {
-					$('#dateStart').val("");
-					$('#dateEnd').val("");
-					return false;
-				} else
+				var EndDate = $('#dateEnd').val();
+				if (Flag == "區間日期")
 				{
-                    var KeyWord = $('#keyWord').val();
-                    var Type = $('#SearchType').val();
+                    if (!checkInputDate(StartDate) || !checkInputDate(EndDate)) {
+                        $('#dateStart').val("");
+                        $('#dateEnd').val("");
+                        return false;
+                    } else {
+                        var KeyWord = $('#keyWord').val();
+                        var Type = $('#SearchType').val();
 
-                    console.log("Flag: " + Flag + ". StartDate: " + StartDate + ". EndDate: " + EndDate + ". KeyWord: " + KeyWord + ". Type: " + Type + "");
-                    CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
-				}
-            });
-<<<<<<< HEAD
-=======
-
-            //查詢按鈕
-            $("#btnQuery").on('click', function () {
-                var Unit = $('#Unitsel').val();
-                var InnerUnit = $('#InnerUnitsel').val();
-                BtnCCTVQuery(Unit, InnerUnit);
-            });
-
-            $("#btnUpload").click(function () {
-
-                let hostOrigion = "http://localhost";
-                var url = "/vtsApi/api/CCTV/UploadFiles";
-                var Url = hostOrigion + url;
-
-                var data = new FormData($('#upload_form')[0]);
-
-                $.ajax({
-                    type: "POST",
-                    url: Url,    // CALL WEB API TO SAVE THE FILES.
-                    enctype: 'multipart/form-data',
-                    contentType: false,
-                    processData: false,         // PREVENT AUTOMATIC DATA PROCESSING.
-                    cache: false,
-                    data: data, 		        // DATA OR FILES IN THIS CONTEXT.
-                    success: function (data, textStatus, xhr) {
-                        $("#fileProgress").hide();
-                        $('p').text(data);
-                    },
-                    //error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    //	alert(textStatus + ': ' + errorThrown);
-                    //},
-                    xhr: function () {
-                        var fileXhr = $.ajaxSettings.xhr();
-                        if (fileXhr.upload) {
-                            $("progress").show();
-                            fileXhr.upload.addEventListener("progress", function (e) {
-                                if (e.lengthComputable) {
-                                    $("#fileProgress").attr({
-                                        value: e.loaded,
-                                        max: e.total
-                                    });
-                                }
-                            }, false);
-                        }
-                        return fileXhr;
+                        console.log("Flag: " + Flag + ". StartDate: " + StartDate + ". EndDate: " + EndDate + ". KeyWord: " + KeyWord + ". Type: " + Type + "");
+                        CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
                     }
-                });
+				}
+
+                var KeyWord = $('#keyWord').val();
+                var Type = $('#SearchType').val();
+
+                console.log("Flag: " + Flag + ". StartDate: " + StartDate + ". EndDate: " + EndDate + ". KeyWord: " + KeyWord + ". Type: " + Type + "");
+                CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type);
             });
->>>>>>> ebf64e6528e99e88a728a638e53fd2ef1818e1cc
         });
 
 		// let screenLog = document.querySelector('#screen-log');
