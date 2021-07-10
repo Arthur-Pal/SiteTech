@@ -3330,6 +3330,31 @@ li.no-data {
   display: block;
 }
 
+.video-play {
+  width: 100%;
+  height: 100vh;
+  background: #555;
+  padding: 5% 0 0;
+}
+
+.vidoe-area {
+  width: 80%;
+  max-width: 14400px;
+  padding: 10px;
+  margin: 0 auto;
+}
+.vidoe-area h2 {
+  font-size: 24px;
+  color: #eee;
+  margin: 0 0 5px;
+}
+.vidoe-area video {
+  width: 100%;
+  padding: 10px;
+  background: #ddd;
+  display: block;
+}
+
 /* 20210630 修改韶元套件 new*/
 .upload-box form {
   display: flex;
