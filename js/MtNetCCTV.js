@@ -11,6 +11,7 @@ $(document).ready(function () {
 function LoadCCTVURL()
 {
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/GetCCTVInit";
     var Url = hostOrigion + url;
     var Unitdatas = new Array();
@@ -71,6 +72,7 @@ function BtnCCTVQuery(Unit, InnerUnit) {
     console.log("Btn Click Unit = " + Unit + " , InnerUnit = " + InnerUnit + "");
 
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/GetCCTVQuery/?Unit=" + Unit + "&InnerUnit=" + InnerUnit + "";
     var Url = hostOrigion + url;
 
@@ -114,6 +116,7 @@ function LoadCCTVManagement()
 {
     console.log("Enter GetCCTVManagerListInit");
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/GetCCTVManagerListInit";
     var Url = hostOrigion + url;
 
@@ -157,6 +160,7 @@ function CCTVManagerListDelete(UUID)
 {
     console.log("Enter Delete");
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/DeleteCCTVManageList/?UUID=" + UUID + "";
     var Url = hostOrigion + url;
 
@@ -178,6 +182,7 @@ function CCTVManagerSearch(Flag, StartDate, EndDate, KeyWord, Type)
 {
     console.log("Enter Search");
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/GetCCTVManageListQuery";
     var Url = hostOrigion + url;
 
@@ -286,6 +291,7 @@ function display_pages(state, Qdata , totalCounts, current_page) {
             var L_limit = Number(String(page) + 0) - 9;
 
             let hostOrigion = "http://localhost";
+            hostOrigion = location.origin;
             var url = "/vtsApi/api/CCTV/PageChange";
             var Url = hostOrigion + url;
 
@@ -394,6 +400,7 @@ function InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type,
     console.log("InsertCCTVManager local: " + local + " dateTime : " + dateTime + " shipName : " + shipName + " eventName : " + eventName + " Uploader : " + Uploader + " Type : " + Type + " addNoteMesg : " + addNoteMesg + "")
 
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/InsertCCTVData";
     var Url = hostOrigion + url;
 
@@ -430,6 +437,7 @@ function InsertCCTVManager(local, dateTime, shipName, eventName, Uploader, Type,
 function UpdateCCTVManager(local, dateTime, shipName, eventName, Uploader, Type, addNoteMesg , UUID)
 {
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/UpdateCCTVData";
     var Url = hostOrigion + url;
 
@@ -465,6 +473,7 @@ function GetViewData(UUID)
 {
     console.log("Enter GetEditData() :" + UUID + "")
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/GetCCTVManageView/?UUID=" + UUID + "";
     var Url = hostOrigion + url;
 
@@ -495,6 +504,7 @@ function GetEditData(UUID)
     console.log("Enter GetEditData() :" + UUID +"")
 
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/GetCCTVManageEdit/?UUID=" + UUID + "";
     var Url = hostOrigion + url;
 
@@ -510,6 +520,9 @@ function GetEditData(UUID)
             $('#noteMesg').val("" + data.Remark + "");
             $('#UUID').val("" + data.UUID + "");
 
+            document.getElementById("Filmfile").value = "";
+            document.getElementById("Picfile").value = "";
+
             GetShowFilm(data.UUID, "Edit");
             GetShowPic(data.UUID, "Edit");
         },
@@ -524,6 +537,7 @@ function GetShowFilm(CCTVListUUID , event)
 {
     console.log("Show Film! CCTVListUUID " + CCTVListUUID + " event :" + event+ "");
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var Type = "影片"
     var url = "/vtsApi/api/CCTV/GetShow/?CCTVListUUID=" + CCTVListUUID + "&Type=" + Type + "";
     var Url = hostOrigion + url;
@@ -579,6 +593,7 @@ function DeleteFile(UUID)
     console.log(" DeleteFile() : " + UUID + "");
 
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var url = "/vtsApi/api/CCTV/DeleteUploadFiles/?UUID=" + UUID + "";
     var Url = hostOrigion + url;
 
@@ -601,6 +616,7 @@ function GetShowPic(CCTVListUUID, event)
 {
     console.log("GetShowPic! CCTVListUUID " + CCTVListUUID + " event :" + event + "");
     let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
     var Type = "照片"
     var url = "/vtsApi/api/CCTV/GetShow/?CCTVListUUID=" + CCTVListUUID + "&Type=" + Type + "";
     var Url = hostOrigion + url;
@@ -611,7 +627,7 @@ function GetShowPic(CCTVListUUID, event)
         contentType: "application/json; charset=utf-8",
         success: function (data) {
             $('#CCTV-GetShowPic-Anchor-point').empty();
-            $('#CCTV-GetShowPic-Anchor-point2').empty();
+            $('#photoList').empty();
             if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
                     // 添加下方影片圖像List
@@ -628,15 +644,61 @@ function GetShowPic(CCTVListUUID, event)
                     var txt6 = '</p>';
                     var txt7 = '</li>';             
                     var allPhoto = txt1 + txt2 + txt3 + txt4 + txt5 + txt6 + txt7;
+
                     $('#CCTV-GetShowPic-Anchor-point').append(allPhoto);
-                    $('#CCTV-GetShowPic-Anchor-point2').append(allPhoto);
+                    $('#photoList').append(allPhoto);
+                }
+
+                for (var i = 0; i < data.length; i++)
+                {
+                    var txt1 = '<div class="swiper-slide">';
+                    var txt2 = '<div class="photo-item">';
+                    var txt3 = '<img src="' + data[i].FilePath +'" alt="">';
+                    var txt4 = '</div>';
+                    var txt5 = '</div>';
+                    var allPhoto2 = txt1 + txt2 + txt3 + txt4 + txt5;
+
+                    $('#swiperwrapper').append(allPhoto2);
                 }
             }
 
-            //刪除
+                            //刪除
             $('.del-photo').on('click', function () {
                 var UUID = $(this).attr("value");
                 DeleteFile(UUID)
+            });
+
+            $('#photoList li').each(function (index) {
+                $(this).on('click', function () {
+                    console.log("in");
+                    $('#photoLgPage').fadeIn(function () {
+                        photoSwiper.slideTo(index);
+                    });
+                })
+            })
+
+            const photoSwiper = new Swiper('#photoSlider', {
+                slidesPerView: 1,
+                spaceBetween: 10,
+                speed: 300,
+                observer: true,
+                observeParents: true,
+                preloadImages: true,
+                updateOnImagesReady: true,
+                autoHeight: true,
+                pagination: {
+                    el: '#photoPagin',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                }
+            });
+
+            //關閉lightbox slide
+            $('#closePhotoLg').on('click', function () {
+                $('#photoLgPage').fadeOut();
             });
         },
         error: function (error) {
@@ -675,4 +737,34 @@ function checkPicfile(sender) {
         return;
     }
     else return true;
+}
+
+function GetOneEditData()
+{
+    console.log("Enter GetOneEditData() :");
+
+    let hostOrigion = "http://localhost";
+    hostOrigion = location.origin;
+    var url = "/vtsApi/api/CCTV/SelectTopUUID/";
+    var Url = hostOrigion + url;
+
+    $.ajax({
+        url: Url,
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            $('#editLocal').val("" + data.Location + "");
+            $('#editShipName').val("" + data.ShipName + "");
+            $('#editEventName').val("" + data.EventName + "");
+            $('#editDateTime').val("" + data.Time + "");
+            $('#noteMesg').val("" + data.Remark + "");
+            $('#UUID').val("" + data.UUID + "");
+
+            //GetShowFilm(data.UUID, "Edit");
+            //GetShowPic(data.UUID, "Edit");
+        },
+        error: function (error) {
+            alert('Fail Edit Data');
+        }
+    });
 }
